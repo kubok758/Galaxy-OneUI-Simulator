@@ -1,6 +1,7 @@
 export type AppId =
   | 'settings' | 'phone' | 'messages' | 'camera' | 'gallery' | 'clock'
-  | 'calculator' | 'files' | 'internet' | 'music' | 'contacts' | 'notes';
+  | 'calculator' | 'files' | 'internet' | 'music' | 'contacts' | 'notes'
+  | 'calendar' | 'weather' | 'email' | 'reminder' | 'recorder' | 'health' | 'smartthings' | 'compass';
 
 export type SystemSettings = {
   theme: 'dark' | 'light';
