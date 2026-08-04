@@ -1,0 +1,29 @@
+{
+  "name": "Samsung Galaxy One UI 8.5 Simulator",
+  "short_name": "Galaxy One UI",
+  "description": "Интерактивный симулятор Samsung Galaxy с интерфейсом One UI 8.5",
+  "lang": "ru",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "portrait-primary",
+  "background_color": "#05060b",
+  "theme_color": "#05060b",
+  "categories": ["entertainment", "utilities"],
+  "icons": [
+    {
+      "src": "oneui-icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "oneui-maskable.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
