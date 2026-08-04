@@ -1,14 +1,26 @@
-{
-  "compilerOptions": {
-    "composite": true,
-    "skipLibCheck": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "allowImportingTsExtensions": true,
-    "noEmit": true
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  // Название репозитория GitHub обязательно указывается здесь.
+  base: '/Galaxy-OneUI-Simulator/',
+
+  plugins: [react()],
+
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
   },
-  "include": [
-    "vite.config.ts",
-    "playwright.config.ts"
-  ]
-}
+
+  preview: {
+    host: '0.0.0.0',
+    port: 4173,
+  },
+
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.ts'],
+    css: true,
+    globals: true,
+  },
+});
