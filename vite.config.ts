@@ -1,12 +1,26 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  // Название репозитория GitHub обязательно указывается здесь.
+  base: '/Galaxy-OneUI-Simulator/',
+
   plugins: [react()],
-  server: { host: true, port: 5173 },
+
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+  },
+
+  preview: {
+    host: '0.0.0.0',
+    port: 4173,
+  },
+
   test: {
     environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
+    setupFiles: ['./src/test/setup.ts'],
     css: true,
+    globals: true,
   },
 });
