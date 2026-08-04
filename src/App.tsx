@@ -1,5 +1,6 @@
 import { RotateCcw, Smartphone } from 'lucide-react';
 import { PhoneFrame } from './components/PhoneFrame';
+import { PwaInstallPrompt } from './components/PwaInstallPrompt';
 import { usePhoneStore } from './state/usePhoneStore';
 
 export default function App() {
@@ -7,7 +8,8 @@ export default function App() {
   const locked = usePhoneStore((s) => s.locked);
 
   return (
-    <main className="h-[100dvh] w-full overflow-hidden text-white lg:min-h-screen lg:h-auto lg:px-6 lg:py-8">
+    <main className="h-[100dvh] w-full overflow-hidden text-white lg:h-auto lg:min-h-screen lg:px-6 lg:py-8">
+      <PwaInstallPrompt />
       <div className="mx-auto flex h-full w-full items-center justify-center lg:grid lg:min-h-[calc(100vh-4rem)] lg:max-w-6xl lg:grid-cols-[1fr_440px_1fr] lg:gap-8">
         <section className="hidden lg:block">
           <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-[20px] bg-blue-400/15 text-blue-300">
