@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: SamsungOne, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color-scheme: dark;
+  background: #08090c;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body, #root { min-width: 320px; min-height: 100%; margin: 0; }
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(73, 110, 169, .20), transparent 35%),
+    radial-gradient(circle at 85% 80%, rgba(116, 65, 168, .18), transparent 38%),
+    #08090c;
+}
+button, input, textarea, select { font: inherit; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent, #8ab4ff) 80%, white);
+  outline-offset: 2px;
+}
+.phone-screen { overscroll-behavior: contain; touch-action: pan-x pan-y; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+.oneui-card { background: color-mix(in srgb, var(--surface, #1a1b20) 92%, transparent); border: 1px solid rgba(255,255,255,.06); }
+.oneui-button { transition: transform .16s ease, filter .16s ease, background .16s ease; }
+.oneui-button:active { transform: scale(.96); filter: brightness(1.12); }
+.range { accent-color: var(--accent, #8ab4ff); }
+.wallpaper-aurora { background: radial-gradient(circle at 25% 15%, #436aa7 0, transparent 35%), radial-gradient(circle at 85% 70%, #6c3f8e 0, transparent 42%), linear-gradient(150deg, #0b1727 0%, #16101e 55%, #07080c 100%); }
+.wallpaper-ocean { background: radial-gradient(circle at 60% 20%, #57c7e8 0, transparent 30%), linear-gradient(165deg, #0a456b 0%, #07192a 60%, #04070d 100%); }
+.wallpaper-sunset { background: radial-gradient(circle at 50% 45%, #ff9a72 0, transparent 25%), linear-gradient(160deg, #512d67 0%, #a5485f 45%, #16101d 100%); }
+.wallpaper-graphite { background: linear-gradient(145deg, #2b2d32 0%, #111216 55%, #050506 100%); }
