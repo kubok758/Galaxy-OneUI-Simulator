@@ -1,0 +1,24 @@
+import { AnimatePresence, motion } from 'framer-motion';
+import { ImagePlus, Laugh, Search, Send, X } from 'lucide-react';
+import { useMemo, useRef, useState } from 'react';
+import { AppShell } from '../components/AppShell';
+import { usePhoneStore } from '../state/usePhoneStore';
+
+export function MessagesApp() {
+  const chats = usePhoneStore((s) => s.chats);
+  const contacts = usePhoneStore((s) => s.contacts);
+  const sendMessage = usePhoneStore((s) => s.sendMessage);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [text, setText] = useState('');
+  const [query, setQuery] = useState('');
+  const [emoji, setEmoji] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const chat = chats.find((c) => c.id === selected);
+  const contact = contacts.find((c) => c.id === chat?.contactId);
+  const filtered = useMemo(() => chats.filter((c) => (contacts.find((x) => x.id === c.contactId)?.name ?? '').toLowerCase().includes(query.toLowerCase())), [chats, contacts, query]);
+  const submit = () => { if (!selected || !text.trim()) return; sendMessage(selected, { text: text.trim() }); setText(''); };
+  const upload = (file?: File) => { if (!file || !selected) return; const reader = new FileReader(); reader.onload = () => sendMessage(selected, { image: String(reader.result) }); reader.readAsDataURL(file); };
+  return <AppShell title={contact ? contact.name : 'Сообщения'} actions={selected ? <button aria-label="Закрыть чат" onClick={() => setSelected(null)}><X/></button> : undefined}>
+    <AnimatePresence mode="wait">{!selected ? <motion.div key="list" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="px-4"><div className="mb-4 flex items-center gap-2 rounded-full bg-[var(--surface)] px-4"><Search size={17}/><input aria-label="Поиск чатов" value={query} onChange={(e) => setQuery(e.target.value)} className="h-11 flex-1 bg-transparent outline-none" placeholder="Поиск сообщений"/></div>{filtered.map((item) => { const c = contacts.find((x) => x.id === item.contactId); const last = item.messages.at(-1); return <button key={item.id} onClick={() => setSelected(item.id)} className="flex w-full items-center gap-3 border-b border-white/5 py-4 text-left"><span className="grid h-12 w-12 place-items-center rounded-full bg-[var(--accent)]/25 text-lg">{c?.name.slice(0,1)}</span><span className="min-w-0 flex-1"><span className="flex justify-between"><strong>{c?.name}</strong><small className="opacity-45">{last?.time}</small></span><span className="block truncate text-sm opacity-55">{last?.text ?? 'Изображение'}</span></span>{item.unread > 0 && <span className="grid h-5 w-5 place-items-center rounded-full bg-[var(--accent)] text-[10px] text-zinc-950">{item.unread}</span>}</button>; })}</motion.div> : <motion.div key="chat" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="flex h-full flex-col px-3"><div className="no-scrollbar flex-1 space-y-2 overflow-y-auto py-3">{chat?.messages.map((m) => <div key={m.id} className={`flex ${m.sender === 'me' ? 'justify-end' : 'justify-start'}`}><div className={`max-w-[78%] rounded-[22px] px-4 py-2.5 ${m.sender === 'me' ? 'rounded-br-md bg-[var(--accent)] text-zinc-950' : 'rounded-bl-md bg-[var(--surface)]'}`}>{m.image && <img src={m.image} alt="Отправленное изображение" className="mb-2 max-h-52 rounded-xl object-cover"/>}{m.text && <p className="whitespace-pre-wrap text-sm">{m.text}</p>}<small className="mt-1 block text-right text-[9px] opacity-55">{m.time}</small></div></div>)}</div><div className="relative mb-2 flex items-end gap-2"><label className="grid h-11 w-11 shrink-0 cursor-pointer place-items-center rounded-full bg-[var(--surface)]" aria-label="Отправить изображение"><ImagePlus size={19}/><input type="file" accept="image/*" className="hidden" onChange={(e) => upload(e.target.files?.[0])}/></label><div className="flex min-h-11 flex-1 items-center rounded-[22px] bg-[var(--surface)] px-3"><input ref={inputRef} aria-label="Текст сообщения" value={text} onChange={(e) => setText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && submit()} className="min-w-0 flex-1 bg-transparent outline-none" placeholder="Сообщение"/><button aria-label="Эмодзи" onClick={() => setEmoji(!emoji)}><Laugh size={20}/></button></div><button data-testid="send-message" aria-label="Отправить сообщение" onClick={submit} className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[var(--accent)] text-zinc-950"><Send size={19}/></button>{emoji && <div className="absolute bottom-14 right-10 grid grid-cols-6 rounded-2xl bg-zinc-800 p-2 shadow-xl">{'😀 😂 😍 👍 🎉 ❤️ 😎 🤔 😭 🔥 ✅ 🚀'.split(' ').map((e) => <button key={e} onClick={() => { setText((t) => t + e); setEmoji(false); inputRef.current?.focus(); }} className="p-1 text-xl">{e}</button>)}</div>}</div></motion.div>}</AnimatePresence>
+  </AppShell>;
+}
