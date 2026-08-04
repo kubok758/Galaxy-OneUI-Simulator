@@ -11,8 +11,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
+    const appBase = new URL('./', document.baseURI);
+    const serviceWorkerUrl = new URL('sw.js', appBase);
+
     navigator.serviceWorker
-      .register(`${import.meta.env.BASE_URL}sw.js`, { scope: import.meta.env.BASE_URL })
-      .catch((error) => console.error('Service worker registration failed:', error));
+      .register(serviceWorkerUrl.href, { scope: appBase.pathname })
+      .catch((error: unknown) => console.error('Service worker registration failed:', error));
   });
 }
