@@ -1,6 +1,7 @@
 import {
   Settings, Phone, MessageSquare, Camera, Images, Clock3, Calculator,
-  Folder, Globe2, Music2, ContactRound, NotebookPen,
+  Folder, Globe2, Music2, ContactRound, NotebookPen, CalendarDays,
+  CloudSun, Mail, ListTodo, Mic, HeartPulse, Home, Compass,
 } from 'lucide-react';
 import type { AppId } from '../types';
 
@@ -17,6 +18,18 @@ export const appMeta: Record<AppId, { name: string; icon: typeof Settings; gradi
   music: { name: 'Музыка', icon: Music2, gradient: 'from-rose-400 to-red-600' },
   contacts: { name: 'Контакты', icon: ContactRound, gradient: 'from-cyan-400 to-teal-600' },
   notes: { name: 'Samsung Notes', icon: NotebookPen, gradient: 'from-orange-300 to-amber-500' },
+  calendar: { name: 'Календарь', icon: CalendarDays, gradient: 'from-emerald-400 to-teal-600' },
+  weather: { name: 'Погода', icon: CloudSun, gradient: 'from-sky-300 to-blue-600' },
+  email: { name: 'Email', icon: Mail, gradient: 'from-blue-400 to-indigo-700' },
+  reminder: { name: 'Напоминания', icon: ListTodo, gradient: 'from-violet-400 to-purple-700' },
+  recorder: { name: 'Диктофон', icon: Mic, gradient: 'from-red-400 to-rose-700' },
+  health: { name: 'Samsung Health', icon: HeartPulse, gradient: 'from-emerald-400 to-cyan-700' },
+  smartthings: { name: 'SmartThings', icon: Home, gradient: 'from-blue-400 to-cyan-600' },
+  compass: { name: 'Компас', icon: Compass, gradient: 'from-zinc-400 to-slate-700' },
 };
 
-export const appOrder: AppId[] = ['phone', 'messages', 'camera', 'gallery', 'settings', 'clock', 'calculator', 'files', 'internet', 'music', 'contacts', 'notes'];
+export const appOrder: AppId[] = [
+  'phone', 'messages', 'camera', 'gallery', 'settings', 'clock', 'calculator', 'files',
+  'calendar', 'weather', 'email', 'reminder', 'internet', 'music', 'contacts', 'notes',
+  'recorder', 'health', 'smartthings', 'compass',
+];
