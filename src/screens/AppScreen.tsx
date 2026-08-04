@@ -12,6 +12,14 @@ import { InternetApp } from '../apps/InternetApp';
 import { MusicApp } from '../apps/MusicApp';
 import { ContactsApp } from '../apps/ContactsApp';
 import { NotesApp } from '../apps/NotesApp';
+import { CalendarApp } from '../apps/CalendarApp';
+import { WeatherApp } from '../apps/WeatherApp';
+import { EmailApp } from '../apps/EmailApp';
+import { ReminderApp } from '../apps/ReminderApp';
+import { VoiceRecorderApp } from '../apps/VoiceRecorderApp';
+import { HealthApp } from '../apps/HealthApp';
+import { SmartThingsApp } from '../apps/SmartThingsApp';
+import { CompassApp } from '../apps/CompassApp';
 import type { AppId } from '../types';
 
 const apps: Record<AppId, React.ComponentType> = {
@@ -27,6 +35,14 @@ const apps: Record<AppId, React.ComponentType> = {
   music: MusicApp,
   contacts: ContactsApp,
   notes: NotesApp,
+  calendar: CalendarApp,
+  weather: WeatherApp,
+  email: EmailApp,
+  reminder: ReminderApp,
+  recorder: VoiceRecorderApp,
+  health: HealthApp,
+  smartthings: SmartThingsApp,
+  compass: CompassApp,
 };
 
 export function AppScreen() {
