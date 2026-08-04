@@ -11,10 +11,16 @@
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body, #root { min-width: 320px; min-height: 100%; margin: 0; }
+html, body, #root {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+}
 body {
-  min-height: 100vh;
-  overflow-x: hidden;
+  min-height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
   background:
     radial-gradient(circle at 15% 15%, rgba(73, 110, 169, .20), transparent 35%),
     radial-gradient(circle at 85% 80%, rgba(116, 65, 168, .18), transparent 38%),
@@ -36,3 +42,14 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 .wallpaper-ocean { background: radial-gradient(circle at 60% 20%, #57c7e8 0, transparent 30%), linear-gradient(165deg, #0a456b 0%, #07192a 60%, #04070d 100%); }
 .wallpaper-sunset { background: radial-gradient(circle at 50% 45%, #ff9a72 0, transparent 25%), linear-gradient(160deg, #512d67 0%, #a5485f 45%, #16101d 100%); }
 .wallpaper-graphite { background: linear-gradient(145deg, #2b2d32 0%, #111216 55%, #050506 100%); }
+
+@media (display-mode: standalone), (display-mode: fullscreen) {
+  html, body, #root {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  body {
+    background: #05060b;
+  }
+}
